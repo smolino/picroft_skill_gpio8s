@@ -1,6 +1,6 @@
 install:
-	mkdir -p ~/.mycroft/skills/gpio_skill
-	cp -r * ~/.mycroft/skills/gpio_skill/
+	mkdir -p /opt/mycroft/skills/skill-gpio
+	cp -r * /opt/mycroft/skills/skill-gpio
 
 remove:
-	rm -rf ~/.mycroft/skills/gpio_skill
+	rm -rf /opt/mycroft/skills/skill-gpio
