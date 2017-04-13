@@ -8,6 +8,16 @@ import json
 import threading
 import time
 
+try:
+    import RPi.GPIO as GPIO
+    """This is trapped so you can still run without RPi.GPIO
+
+    GPIO will be checked before use
+    """
+except:
+    pass
+
+
 blink_active = False
 """bool: to controll weather blink continues to be active
 
@@ -15,7 +25,7 @@ This will not start the blinking it will only be important once blinking
 has started.  This is currently only used in testing.
 """
 
-GPIO = {}
+GPIO_STATE = {}
 """ This is an object of tracking GPIO"""
 
 GPIO_ON = {}
@@ -38,7 +48,7 @@ def set(key,value):
         key(int or str): Used to identify the gpio to interface
         value(int or str): The value to set the gpio to.
     """
-    GPIO[key] = value
+    GPIO_STATE[key] = value
     if key in GPIO_ON:
         GPIO_ON[key]()
 
@@ -48,7 +58,7 @@ def get(key):
     Args:
         key(int or str): Used to identify the gpio to interface
     """
-    return GPIO[key]
+    return GPIO_STATE[key]
 
 def on(key,function):
     """Used to set the function for the GPIO interface
@@ -61,7 +71,7 @@ def on(key,function):
 
 def json():
     """Returns a json object of the GPIO info"""
-    return json.dumps(GPIO)
+    return json.dumps(GPIO_STATE)
 
 
 if __name__=="__main__":
@@ -71,7 +81,7 @@ if __name__=="__main__":
     for changes going forward
     """
     def printgpio():
-        print GPIO
+        print(GPIO_STATE)
 
     def blink_led():
         if blink_active:
@@ -88,4 +98,7 @@ if __name__=="__main__":
     blink_led()
     time.sleep(10)
     blink_active = False
+    print("GPIO",type(GPIO))
+    if type(GPIO)!="undefined":
+        print("GPIO is valid")
 
