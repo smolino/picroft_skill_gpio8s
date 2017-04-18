@@ -14,7 +14,9 @@ try:
 
     GPIO will be checked before use
     """
+    pi_interface = True
 except:
+    pi_interface = False
     pass
 
 
@@ -38,6 +40,18 @@ These functions will be called when the GPIO is changed in any way.
 is_imported = True
 """Used as a flag to show that GPIO was imported"""
 
+def ButtonHandeler(channel):
+    if GPIO.input(channel) == GPIO.HIGH:
+        set("Button","Pressed")
+    else:
+        set("Button","Released")
+
+if pi_interface:
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(27,GPIO.OUT)
+    GPIO.setup(17,GPIO.IN)
+    GPIO.add_event_detect(17,GPIO.BOTH,ButtonHandeler)
+
 def set(key,value):
     """This is used to set values for GPIO
 
@@ -49,6 +63,11 @@ def set(key,value):
         value(int or str): The value to set the gpio to.
     """
     GPIO_STATE[key] = value
+    if (key=="GPIO1") and pi_interface:
+        if value.upper()=="ON":
+            GPIO.output(27,GPIO.HIGH)
+        else:
+            GPIO.output(27,GPIO.LOW)
     if key in GPIO_ON:
         GPIO_ON[key]()
 
@@ -98,7 +117,6 @@ if __name__=="__main__":
     blink_led()
     time.sleep(10)
     blink_active = False
-    print("GPIO",type(GPIO))
-    if type(GPIO)!="undefined":
+    if pi_interface:
         print("GPIO is valid")
 

@@ -30,13 +30,13 @@ import GPIO
 
 __author__ = 'amcgee7'
 
-LOGGER = logging.getLogger(__name__)
-handler = logging.FileHandler(__name__+'.log');
-handler.setLevel(logging.DEBUG)
-LOGGER.addHandler(handler)
+#LOGGER = logging.getLogger(__name__)
+#handler = logging.FileHandler(__name__+'.log');
+#handler.setLevel(logging.DEBUG)
+#LOGGER.addHandler(handler)
 """Start Logger and create log file"""
 
-LOGGER.info("File %s Started",__name__)
+#LOGGER.info("File %s Started",__name__)
 
 
 class GPIO_ControlSkill(MycroftSkill):
@@ -58,6 +58,10 @@ class GPIO_ControlSkill(MycroftSkill):
         status = GPIO.get("GPIO1")
         self.speak("Led is %s" % status)
 
+    def on_button_change(self):
+        status = GPIO.get("Button")
+        self.speak("Button is %s" % status)
+
     def __init__(self):
         """This is used to initize the GPIO kill
 
@@ -66,6 +70,7 @@ class GPIO_ControlSkill(MycroftSkill):
         """
         self.blink_active = False
         GPIO.on("GPIO1",self.on_led_change)
+        GPIO.on("Button",self.on_button_change)
         super(GPIO_ControlSkill, self).__init__(name="GPIO_ControlSkill")
 
     def blink_led(self):
@@ -93,7 +98,7 @@ class GPIO_ControlSkill(MycroftSkill):
         and is not required going forward.
 
         """
-        LOGGER.info("initialize GPIO_ControlSkill dir=%s",dirname(__file__))
+        #LOGGER.info("initialize GPIO_ControlSkill dir=%s",dirname(__file__))
         self.load_data_files(dirname(__file__))
 
         command_intent = IntentBuilder("IoCommandIntent").require("command").require("ioobject").optionally("ioparam").build()
