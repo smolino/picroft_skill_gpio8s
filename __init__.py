@@ -9,6 +9,11 @@ Example:
     Blink Led
     Led Status
 
+Responses:
+    Led is Off
+    Led is On
+    Button Pressed
+    Button Released
 
 """
 
@@ -29,14 +34,6 @@ import GPIO
 """ Includes the GPIO interface"""
 
 __author__ = 'amcgee7'
-
-#LOGGER = logging.getLogger(__name__)
-#handler = logging.FileHandler(__name__+'.log');
-#handler.setLevel(logging.DEBUG)
-#LOGGER.addHandler(handler)
-"""Start Logger and create log file"""
-
-#LOGGER.info("File %s Started",__name__)
 
 
 class GPIO_ControlSkill(MycroftSkill):
@@ -98,7 +95,6 @@ class GPIO_ControlSkill(MycroftSkill):
         and is not required going forward.
 
         """
-        #LOGGER.info("initialize GPIO_ControlSkill dir=%s",dirname(__file__))
         self.load_data_files(dirname(__file__))
 
         command_intent = IntentBuilder("IoCommandIntent").require("command").require("ioobject").optionally("ioparam").build()

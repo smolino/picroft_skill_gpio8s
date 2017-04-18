@@ -41,11 +41,17 @@ is_imported = True
 """Used as a flag to show that GPIO was imported"""
 
 def ButtonHandeler(channel):
+    """This handels the button press and sets the state
+
+    Args:
+        channel(int):  The RPi GPIO channel used for monitoring the button
+    """
     if GPIO.input(channel) == GPIO.HIGH:
         set("Button","Pressed")
     else:
         set("Button","Released")
 
+"""This is the setup for the RPi GPIO"""
 if pi_interface:
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(27,GPIO.OUT)
