@@ -26,9 +26,13 @@ import threading
 sys.path.append(abspath(dirname(__file__)))
 
 from adapt.intent import IntentBuilder
-from mycroft.skills.core import MycroftSkill
-from mycroft.util.log import getLogger
-import logging.handlers
+try:
+    from mycroft.skills.core import MycroftSkill
+except:
+    class MycroftSkill:
+        pass
+
+#import logging.handlers
 
 import GPIO
 """ Includes the GPIO interface"""
