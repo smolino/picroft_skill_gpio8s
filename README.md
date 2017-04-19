@@ -20,10 +20,7 @@ These are required for doc generation.
 
 The documentation is done by sphinx with some of it in the code.  The following will generate the html docs.
 
-```
-cd docs
-make html
-```
+```make docs```
 
 You can then find the generated html in ```docs/build/html/index.html```.  Open that file in your browser and you should be able to navigate the docs.
 
