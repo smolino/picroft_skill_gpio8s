@@ -9,6 +9,15 @@ Be sure that mycroft user has the following the group for gpio
 
 ## Documenting
 
+### Requires
+
+These are required for doc generation.
+
+ - graphviz
+ - sphinx
+
+### Generation
+
 The documentation is done by sphinx with some of it in the code.  The following will generate the html docs.
 
 ```
