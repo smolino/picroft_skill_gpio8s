@@ -1,14 +1,14 @@
 Auto Generated Documentation
 ============================
 
-gpio_skill
-----------
+picroft_example_skill_gpio
+--------------------------
 
-.. automodule:: gpio_skill
+.. automodule:: picroft_example_skill_gpio
   :members:
 
-gpio_skill.GPIO
----------------
+picroft_example_skill_gpio.GPIO
+-------------------------------
 
-.. automodule:: gpio_skill.GPIO
+.. automodule:: picroft_example_skill_gpio.GPIO
   :members:
