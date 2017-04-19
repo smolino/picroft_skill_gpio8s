@@ -4,16 +4,20 @@
 This allows users to control an LED The LED is Attached to GPIO1
 
 Example:
-    Turn Led On
-    Turn Led Off
-    Blink Led
-    Led Status
+    literal blocks::
+
+        Turn Led On
+        Turn Led Off
+        Blink Led
+        Led Status
 
 Responses:
-    Led is Off
-    Led is On
-    Button Pressed
-    Button Released
+    literal blocks::
+
+        Led is Off
+        Led is On
+        Button Pressed
+        Button Released
 
 """
 

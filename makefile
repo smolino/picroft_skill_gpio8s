@@ -17,3 +17,13 @@ install.pi:
 #For testing the install on the RPi
 test.pi:
 	ssh pi@10.0.0.12 python /opt/mycroft/skills/skill-gpio/GPIO.py
+
+docs: docs/source/README.md
+	cd docs && make clean && make html
+
+docs/source/README.md: README.md
+	cp README.md docs/source/README.md
+
+#	pandoc --from=markdown --to=rst --output=docs/README.rst README.md
+
+.PHONY: docs
