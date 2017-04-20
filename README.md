@@ -15,6 +15,8 @@ These are required for doc generation.
 
  - graphviz
  - sphinx
+ - python-rpi.gpio
+ - python3-rpi.gpio
 
 ### Generation
 

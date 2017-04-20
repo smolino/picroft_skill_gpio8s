@@ -12,11 +12,11 @@ remove:
 
 #For remote install to a Picroft image on a RPi
 install.pi:
-	scp -r * pi@10.0.0.12:/opt/mycroft/skills/skill-gpio
+	scp -r * pi@192.168.205.115:/opt/mycroft/skills/skill-gpio
 
 #For testing the install on the RPi
 test.pi:
-	ssh pi@10.0.0.12 python /opt/mycroft/skills/skill-gpio/GPIO.py
+	ssh pi@192.168.205.115 python /opt/mycroft/skills/skill-gpio/GPIO.py
 
 docs: docs/source/README.md
 	cd docs && make clean && make html

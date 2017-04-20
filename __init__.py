@@ -85,7 +85,7 @@ class GPIO_ControlSkill(MycroftSkill):
         until blink_active is false.
         """
         if self.blink_active:
-            threading.Timer(2, self.blink_led).start()
+            threading.Timer(10, self.blink_led).start()
         if self.blink_active:
             if GPIO.get("GPIO1")!="On":
                 GPIO.set("GPIO1","On")
