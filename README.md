@@ -63,3 +63,7 @@ Button Released
 
     vocab - This captures entities used by the skill to understand the vocal command.
     dialog - This is used for responces back to the users.
+
+## Notes
+
+If the blinking is to fast it will be impossible to get a command in edgewise because of the voice responce to the led turning on and off during blinking.
