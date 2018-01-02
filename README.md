@@ -20,6 +20,12 @@ These are required for doc generation.
 
 ### Generation
 
+GPIO Pins used to this project
+
+Project has been made with GPIO Extension Board
+
+Pins connected to the RelaySwitch (27,17,22,05,06,13,19,26)
+
 The documentation is done by sphinx with some of it in the code.  The following will generate the html docs.
 
 ```make docs```
@@ -44,26 +50,28 @@ This will run a test to be sure you have access to the gpio be sure to test on t
 Once installed on a paired Picroft you should be able to issue commands:
 
 ```
-Turn Led On
-Turn Led Off
-Blink Led
-Led Status
+Turn Switch On
+Turn Switch Off
+Turn Light on
+Turn Light Off
+Turn Fan On
+Turn Fan Off
+Turn Living On
+Turn Living Off
+Turn Bathroom On
+Turn Bathroom Off
+Turn Kitchen On
+Turn Kitchen Off
+Turn Lamp On
+Turn Lamp Off
+Turn Bedroom On
+Turn Bedroom Off
 ```
 
-And Picroft should respond with the following.
-
-```
-Led is Off
-Led is On
-Button Pressed
-Button Released
-```
+And Picroft do not respond
 
 ## Files
 
     vocab - This captures entities used by the skill to understand the vocal command.
     dialog - This is used for responces back to the users.
 
-## Notes
-
-If the blinking is to fast it will be impossible to get a command in edgewise because of the voice responce to the led turning on and off during blinking.
