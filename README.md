@@ -31,7 +31,7 @@ The documentation is done by sphinx with some of it in the code.  The following 
 You can then find the generated html in ```docs/build/html/index.html```.  Open that file in your browser and you should be able to navigate the docs.
 
 ## Installing
-Once you have a picroft image configure it for SSH access.  Change the Makefile ip address for the RPi you installed the image onto. Also create the folder ```/opt/mycroft/skills/skill-gpio``` on the RPi for the installer.
+Once you have a picroft image configure it for SSH access.  Change the Makefile ip address for the RPi you installed the image onto. Also create the folder ```/opt/mycroft/skills/skill-gpio8s``` on the RPi for the installer.
 
 ```make install.pi```
 
