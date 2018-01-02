@@ -1,13 +1,11 @@
-# picroft example skill gpio Readme
+# picroft example skill gpio Readme 
 
-This is a skill for picroft that will interact with the GPIO
+This is a skill for picroft that will interact with the GPIO and 8 Swich Relay
 
 ## Requirements
 
 This requires a Picroft install on the RPi you can find instructions on the home.mycroft.ai site.
 Be sure that mycroft user has the following the group for gpio
-
-## Documenting
 
 ### Requires
 
