@@ -41,7 +41,7 @@ import GPIO
 
 """ Includes the GPIO interface"""
 
-__author__ = 'amcgee7'
+__author__ = 'smolino'
 
 
 class GPIO_ControlSkill(MycroftSkill):
