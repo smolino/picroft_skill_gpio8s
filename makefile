@@ -3,20 +3,20 @@ all: install.pi
 
 #Local Install for testing on desktop or laptop
 install:
-	mkdir -p /opt/mycroft/skills/skill-gpio
-	cp -r * /opt/mycroft/skills/skill-gpio
+	mkdir -p /opt/mycroft/skills/skill-gpio8s
+	cp -r * /opt/mycroft/skills/skill-gpio8s
 
 #For removing the local install
 remove:
-	rm -rf /opt/mycroft/skills/skill-gpio
+	rm -rf /opt/mycroft/skills/skill-gpio8s
 
 #For remote install to a Picroft image on a RPi
 install.pi:
-	scp -r * pi@192.168.205.115:/opt/mycroft/skills/skill-gpio
+	scp -r * pi@127.0.0.1:/opt/mycroft/skills/skill-gpio8s
 
 #For testing the install on the RPi
 test.pi:
-	ssh pi@192.168.205.115 python /opt/mycroft/skills/skill-gpio/GPIO.py
+	ssh pi@127.0.0.1 python /opt/mycroft/skills/skill-gpio8s/GPIO.py
 
 docs: docs/source/README.md
 	cd docs && make clean && make html
