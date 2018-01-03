@@ -6,18 +6,24 @@ This allows users to control Relay Switch The Relay Switch is Attached to GPIO1
 Example:
     literal blocks::
 
-        Turn Led On
-        Turn Led Off
+        Turn Light on
+	Turn Light off
         Turn Switch on
         Turn switch off
+	Turn fan on
+	Turn fan off
+	Turn bedroom on
+	Turn bedroom off
+	Turn living on
+	Turn living off
+	Turn bathroom on
+	Turn bathroom off
+	Turn kitchen on
+	Turn kitchen off
+	Turn lamp on
+	Turn lamp off
 
-Responses:
-    literal blocks::
 
-        Led is Off
-        Led is On
-        Switch is on
-        Switch is off
 
 """
 
@@ -45,14 +51,7 @@ __author__ = 'smolino'
 
 
 class GPIO_ControlSkill(MycroftSkill):
-    """This is the skill for controlling GPIO of the Raspberry Pi
-
-    Attributes:
-        blink_active (bool): Defauts to False and is true while the
-            led is suppost to be blinking.  Will be turned to False on
-            repeated blink command or when the led is instructed to go
-            on or off.
-    """
+    """This is the skill for controlling GPIO of the Raspberry Pi"""
 
     def on_led_change(self):
         """used to report the state of the led.
