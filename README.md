@@ -68,6 +68,10 @@ Turn Bedroom Off
 
 And Picroft do not respond
 
+Remember to add mycroft user to gpio group:
+
+sudo useradd mycroft gpio
+
 ## Files
 
     vocab - This captures entities used by the skill to understand the vocal command.
