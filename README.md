@@ -78,6 +78,8 @@ Remember to add mycroft user to gpio group:
 
 sudo usermod -g gpio mycroft
 
+sudo apt-get install rpi.gpio
+
 sudo pip install GPIO
 
 Step 1 – Download the library
