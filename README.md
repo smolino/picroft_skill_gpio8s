@@ -77,7 +77,30 @@ And Picroft do not respond
 Remember to add mycroft user to gpio group:
 
 sudo usermod -g gpio mycroft
+
 sudo pip install GPIO
+
+Step 1 – Download the library
+
+wget https://pypi.python.org/packages/source/R/RPi.GPIO/RPi.GPIO-0.5.11.tar.gz
+
+Step 2 – Extract the archive to a new folder
+
+tar -xvf RPi.GPIO-0.5.11.tar.gz
+
+Step 3 – Browse to the new directory
+
+cd RPi.GPIO-0.5.11
+
+Step 4 – Install the library
+
+sudo python setup.py install
+
+Step 5 – Remove the directory and archive file
+
+cd ~
+
+sudo rm -rf RPi.GPIO-0.*
 
 ## Files
 
