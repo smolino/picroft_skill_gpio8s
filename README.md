@@ -77,6 +77,7 @@ And Picroft do not respond
 Remember to add mycroft user to gpio group:
 
 sudo usermod -g gpio mycroft
+sudo pip install GPIO
 
 ## Files
 
