@@ -44,6 +44,7 @@ except:
         pass
 
 import GPIO
+import LCD1602
 
 """ Includes the GPIO interface"""
 
@@ -59,8 +60,96 @@ class GPIO_ControlSkill(MycroftSkill):
         This is attached to the on change event.  And will speak the
         status of the led.
         """
-        """status = GPIO.get("GPIO1")
-	self.speak("Light is %s" % status)"""
+        status = GPIO.get("GPIO1")
+	self.speak("Light is %s" % status)
+        LCD1602.init(0x27, 1)   # init(slave address, background light)
+        LCD1602.write(0, 0, "Light is %s" % status)
+        exit()
+
+
+    def on_switch_change(self):
+        """used to report the state of the led.
+
+        This is attached to the on change event.  And will speak the
+        status of the led.
+        """
+        status = GPIO.get("GPIO2")
+        self.speak("Switch is %s" % status)
+        LCD1602.init(0x27, 1)   # init(slave address, background light)
+        LCD1602.write(0, 0, "Switch is %s" % status)
+        exit()
+
+    def on_fan_change(self):
+        """used to report the state of the led.
+
+        This is attached to the on change event.  And will speak the
+        status of the led.
+        """
+        status = GPIO.get("GPIO3")
+        self.speak("Fan is %s" % status)
+        LCD1602.init(0x27, 1)   # init(slave address, background light)
+        LCD1602.write(0, 0, "Fan is %s" % status)
+        exit()
+
+    def on_bedroom_change(self):
+        """used to report the state of the led.
+
+        This is attached to the on change event.  And will speak the
+        status of the led.
+        """
+        status = GPIO.get("GPIO4")
+        self.speak("Bedroom is %s" % status)
+        LCD1602.init(0x27, 1)   # init(slave address, background light)
+        LCD1602.write(0, 0, "Bedroom is %s" % status)
+        exit()
+
+    def on_livingroom_change(self):
+        """used to report the state of the led.
+
+        This is attached to the on change event.  And will speak the
+        status of the led.
+        """
+        status = GPIO.get("GPIO5")
+        self.speak("Livingroom is %s" % status)
+        LCD1602.init(0x27, 1)   # init(slave address, background light)
+        LCD1602.write(0, 0, "Livingroom is %s" % status)
+        exit()
+
+    def on_bathroom_change(self):
+        """used to report the state of the led.
+
+        This is attached to the on change event.  And will speak the
+        status of the led.
+        """
+        status = GPIO.get("GPIO6")
+        self.speak("Bathroom is %s" % status)
+        LCD1602.init(0x27, 1)   # init(slave address, background light)
+        LCD1602.write(0, 0, "Bathroom is %s" % status)
+        exit()
+
+    def on_kitchen_change(self):
+        """used to report the state of the led.
+
+        This is attached to the on change event.  And will speak the
+        status of the led.
+        """
+        status = GPIO.get("GPIO7")
+        self.speak("Kitchen is %s" % status)
+        LCD1602.init(0x27, 1)   # init(slave address, background light)
+        LCD1602.write(0, 0, "Kitchen is %s" % status)
+        exit()
+
+    def on_lamp_change(self):
+        """used to report the state of the led.
+
+        This is attached to the on change event.  And will speak the
+        status of the led.
+        """
+        status = GPIO.get("GPIO8")
+        self.speak("Lamp is %s" % status)
+        LCD1602.init(0x27, 1)   # init(slave address, background light)
+        LCD1602.write(0, 0, "Lamp is %s" % status)
+        exit()
 
     def __init__(self):
         """This is used to initize the GPIO kill
@@ -70,13 +159,13 @@ class GPIO_ControlSkill(MycroftSkill):
         """
         self.blink_active = False
         GPIO.on("GPIO1",self.on_led_change)
-        GPIO.on("GPIO2",self.on_led_change)
-        GPIO.on("GPIO3",self.on_led_change)
-        GPIO.on("GPIO4",self.on_led_change)
-        GPIO.on("GPIO5",self.on_led_change)
-        GPIO.on("GPIO6",self.on_led_change)
-        GPIO.on("GPIO7",self.on_led_change)
-        GPIO.on("GPIO8",self.on_led_change)
+        GPIO.on("GPIO2",self.on_switch_change)
+        GPIO.on("GPIO3",self.on_fan_change)
+        GPIO.on("GPIO4",self.on_bedroom_change)
+        GPIO.on("GPIO5",self.on_livingroom_change)
+        GPIO.on("GPIO6",self.on_bathroom_change)
+        GPIO.on("GPIO7",self.on_kitchen_change)
+        GPIO.on("GPIO8",self.on_lamp_change)
         super(GPIO_ControlSkill, self).__init__(name="GPIO_ControlSkill")
 
     def blink_led(self):
@@ -88,10 +177,10 @@ class GPIO_ControlSkill(MycroftSkill):
         if self.blink_active:
             threading.Timer(10, self.blink_led).start()
         if self.blink_active:
-            if GPIO.get("GPIO1")!="Off":
-                GPIO.set("GPIO1","Off")
-            else:
+            if GPIO.get("GPIO1")!="On":
                 GPIO.set("GPIO1","On")
+            else:
+                GPIO.set("GPIO1","Off")
 
     def blink_switch(self):
         """This Will Start the Switch blink process
@@ -394,4 +483,3 @@ class GPIO_ControlSkill(MycroftSkill):
 def create_skill():
     """This function is to create the skill"""
     return GPIO_ControlSkill()
-
