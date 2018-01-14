@@ -72,7 +72,13 @@ Turn Bedroom On
 Turn Bedroom Off
 ```
 
-And Picroft do not respond
+And Picroft respond
+
+Light is on
+Light is off
+Switch is on
+Switch is off
+etc..
 
 Remember to add mycroft user to gpio group:
 
