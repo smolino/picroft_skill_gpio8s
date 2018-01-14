@@ -60,8 +60,8 @@ class GPIO_ControlSkill(MycroftSkill):
         status of the led.
         """
         status = GPIO.get("GPIO1")
-	self.speak("Light is %s" % status)
-        exit()
+	'''self.speak("Light is %s" % status)'''
+        '''exit()'''
 
 
     def on_switch_change(self):
@@ -71,8 +71,8 @@ class GPIO_ControlSkill(MycroftSkill):
         status of the led.
         """
         status = GPIO.get("GPIO2")
-        self.speak("Switch is %s" % status)
-        exit()
+        '''self.speak("Switch is %s" % status)'''
+        '''exit()'''
 
     def on_fan_change(self):
         """used to report the state of the led.
@@ -81,8 +81,8 @@ class GPIO_ControlSkill(MycroftSkill):
         status of the led.
         """
         status = GPIO.get("GPIO3")
-        self.speak("Fan is %s" % status)
-        exit()
+        '''self.speak("Fan is %s" % status)'''
+        '''exit()'''
 
     def on_bedroom_change(self):
         """used to report the state of the led.
@@ -91,8 +91,8 @@ class GPIO_ControlSkill(MycroftSkill):
         status of the led.
         """
         status = GPIO.get("GPIO4")
-        self.speak("Bedroom is %s" % status)
-        exit()
+        '''self.speak("Bedroom is %s" % status)'''
+        '''exit()'''
 
     def on_livingroom_change(self):
         """used to report the state of the led.
@@ -101,8 +101,8 @@ class GPIO_ControlSkill(MycroftSkill):
         status of the led.
         """
         status = GPIO.get("GPIO5")
-        self.speak("Livingroom is %s" % status)
-        exit()
+        '''self.speak("Livingroom is %s" % status)'''
+        '''exit()'''
 
     def on_bathroom_change(self):
         """used to report the state of the led.
@@ -111,8 +111,8 @@ class GPIO_ControlSkill(MycroftSkill):
         status of the led.
         """
         status = GPIO.get("GPIO6")
-        self.speak("Bathroom is %s" % status)
-        exit()
+        '''self.speak("Bathroom is %s" % status)'''
+        '''exit()'''
 
     def on_kitchen_change(self):
         """used to report the state of the led.
@@ -121,8 +121,8 @@ class GPIO_ControlSkill(MycroftSkill):
         status of the led.
         """
         status = GPIO.get("GPIO7")
-        self.speak("Kitchen is %s" % status)
-        exit()
+        '''self.speak("Kitchen is %s" % status)'''
+        '''exit()'''
 
     def on_lamp_change(self):
         """used to report the state of the led.
@@ -131,8 +131,8 @@ class GPIO_ControlSkill(MycroftSkill):
         status of the led.
         """
         status = GPIO.get("GPIO8")
-        self.speak("Lamp is %s" % status)
-        exit()
+        '''self.speak("Lamp is %s" % status)'''
+        '''exit()'''
 
     def __init__(self):
         """This is used to initize the GPIO kill
