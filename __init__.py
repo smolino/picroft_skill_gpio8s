@@ -44,7 +44,7 @@ except:
         pass
 
 import GPIO
-import LCD1602
+'''import LCD1602'''
 
 """ Includes the GPIO interface"""
 
@@ -62,8 +62,8 @@ class GPIO_ControlSkill(MycroftSkill):
         """
         status = GPIO.get("GPIO1")
 	self.speak("Light is %s" % status)
-        LCD1602.init(0x27, 1)   # init(slave address, background light)
-        LCD1602.write(0, 0, "Light is %s" % status)
+        '''LCD1602.init(0x27, 1)   # init(slave address, background light)'''
+        '''LCD1602.write(0, 0, "Light is %s" % status)'''
         exit()
 
 
@@ -75,8 +75,8 @@ class GPIO_ControlSkill(MycroftSkill):
         """
         status = GPIO.get("GPIO2")
         self.speak("Switch is %s" % status)
-        LCD1602.init(0x27, 1)   # init(slave address, background light)
-        LCD1602.write(0, 0, "Switch is %s" % status)
+        '''LCD1602.init(0x27, 1)   # init(slave address, background light)'''
+        '''LCD1602.write(0, 0, "Switch is %s" % status)'''
         exit()
 
     def on_fan_change(self):
@@ -87,8 +87,8 @@ class GPIO_ControlSkill(MycroftSkill):
         """
         status = GPIO.get("GPIO3")
         self.speak("Fan is %s" % status)
-        LCD1602.init(0x27, 1)   # init(slave address, background light)
-        LCD1602.write(0, 0, "Fan is %s" % status)
+        '''LCD1602.init(0x27, 1)   # init(slave address, background light)'''
+        '''LCD1602.write(0, 0, "Fan is %s" % status)'''
         exit()
 
     def on_bedroom_change(self):
@@ -99,8 +99,8 @@ class GPIO_ControlSkill(MycroftSkill):
         """
         status = GPIO.get("GPIO4")
         self.speak("Bedroom is %s" % status)
-        LCD1602.init(0x27, 1)   # init(slave address, background light)
-        LCD1602.write(0, 0, "Bedroom is %s" % status)
+        '''LCD1602.init(0x27, 1)   # init(slave address, background light)'''
+        '''LCD1602.write(0, 0, "Bedroom is %s" % status)'''
         exit()
 
     def on_livingroom_change(self):
@@ -111,8 +111,8 @@ class GPIO_ControlSkill(MycroftSkill):
         """
         status = GPIO.get("GPIO5")
         self.speak("Livingroom is %s" % status)
-        LCD1602.init(0x27, 1)   # init(slave address, background light)
-        LCD1602.write(0, 0, "Livingroom is %s" % status)
+        '''LCD1602.init(0x27, 1)   # init(slave address, background light)'''
+        '''LCD1602.write(0, 0, "Livingroom is %s" % status)'''
         exit()
 
     def on_bathroom_change(self):
@@ -123,8 +123,8 @@ class GPIO_ControlSkill(MycroftSkill):
         """
         status = GPIO.get("GPIO6")
         self.speak("Bathroom is %s" % status)
-        LCD1602.init(0x27, 1)   # init(slave address, background light)
-        LCD1602.write(0, 0, "Bathroom is %s" % status)
+        '''LCD1602.init(0x27, 1)   # init(slave address, background light)'''
+        '''LCD1602.write(0, 0, "Bathroom is %s" % status)'''
         exit()
 
     def on_kitchen_change(self):
@@ -135,8 +135,8 @@ class GPIO_ControlSkill(MycroftSkill):
         """
         status = GPIO.get("GPIO7")
         self.speak("Kitchen is %s" % status)
-        LCD1602.init(0x27, 1)   # init(slave address, background light)
-        LCD1602.write(0, 0, "Kitchen is %s" % status)
+        '''LCD1602.init(0x27, 1)   # init(slave address, background light)'''
+        '''LCD1602.write(0, 0, "Kitchen is %s" % status)'''
         exit()
 
     def on_lamp_change(self):
@@ -147,8 +147,8 @@ class GPIO_ControlSkill(MycroftSkill):
         """
         status = GPIO.get("GPIO8")
         self.speak("Lamp is %s" % status)
-        LCD1602.init(0x27, 1)   # init(slave address, background light)
-        LCD1602.write(0, 0, "Lamp is %s" % status)
+        '''LCD1602.init(0x27, 1)   # init(slave address, background light)'''
+        '''LCD1602.write(0, 0, "Lamp is %s" % status)'''
         exit()
 
     def __init__(self):
