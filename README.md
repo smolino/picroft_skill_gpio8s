@@ -33,7 +33,7 @@ You can then find the generated html in ```docs/build/html/index.html```.  Open 
 ## Installing
 First method
 
-msm install https://github.com/smolino/skill-gpio8s.git
+msm install https://github.com/smolino/picroft_skill_gpio8s.git
 
 Second method
 
