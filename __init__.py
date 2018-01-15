@@ -7,21 +7,21 @@ Example:
     literal blocks::
 
         Turn Light on
-	Turn Light off
+    Turn Light off
         Turn Switch on
         Turn switch off
-	Turn fan on
-	Turn fan off
-	Turn bedroom on
-	Turn bedroom off
-	Turn living on
-	Turn living off
-	Turn bathroom on
-	Turn bathroom off
-	Turn kitchen on
-	Turn kitchen off
-	Turn lamp on
-	Turn lamp off
+    Turn fan on
+    Turn fan off
+    Turn bedroom on
+    Turn bedroom off
+    Turn living on
+    Turn living off
+    Turn bathroom on
+    Turn bathroom off
+    Turn kitchen on
+    Turn kitchen off
+    Turn lamp on
+    Turn lamp off
 
 
 
@@ -53,86 +53,31 @@ __author__ = 'smolino'
 class GPIO_ControlSkill(MycroftSkill):
     """This is the skill for controlling GPIO of the Raspberry Pi"""
 
-    def on_led_change(self):
+    switches = {
+        "LIGHT": {"gpio":"GPIO1", "dialog":"ledblink", "name":"light"},
+        "SWITCH": {"gpio":"GPIO2", "dialog":"switchblink", "name":"switch"},
+        "FAN": {"gpio":"GPIO3", "dialog":"fanblink", "name":"fan"},
+        "BEDROOM": {"gpio":"GPIO4", "dialog":"bedroomblink", "name":"bedroom"},
+        "LIVING": {"gpio":"GPIO5", "dialog":"livingroomblink", "name":"livingroom"},
+        "BATHROOM": {"gpio":"GPIO6", "dialog":"bathroomblink", "name":"bathroom"},
+        "KITCHEN": {"gpio":"GPIO7", "dialog":"kitchenblink", "name":"kitchen"},
+        "LAMP": {"gpio":"GPIO8", "dialog":"lampblink", "name":"lamp"},
+    }
+    def getSwitchKey(self, values, gpio):
+        for key, val in values.iteritems():
+            if val['gpio'] == gpio:
+                return key
+
+    def on_change(self, gpio):
         """used to report the state of the led.
 
         This is attached to the on change event.  And will speak the
         status of the led.
         """
-        status = GPIO.get("GPIO1")
-	'''self.speak("Light is %s" % status)'''
-        '''exit()'''
-
-
-    def on_switch_change(self):
-        """used to report the state of the led.
-
-        This is attached to the on change event.  And will speak the
-        status of the led.
-        """
-        status = GPIO.get("GPIO2")
-        '''self.speak("Switch is %s" % status)'''
-        '''exit()'''
-
-    def on_fan_change(self):
-        """used to report the state of the led.
-
-        This is attached to the on change event.  And will speak the
-        status of the led.
-        """
-        status = GPIO.get("GPIO3")
-        '''self.speak("Fan is %s" % status)'''
-        '''exit()'''
-
-    def on_bedroom_change(self):
-        """used to report the state of the led.
-
-        This is attached to the on change event.  And will speak the
-        status of the led.
-        """
-        status = GPIO.get("GPIO4")
-        '''self.speak("Bedroom is %s" % status)'''
-        '''exit()'''
-
-    def on_livingroom_change(self):
-        """used to report the state of the led.
-
-        This is attached to the on change event.  And will speak the
-        status of the led.
-        """
-        status = GPIO.get("GPIO5")
-        '''self.speak("Livingroom is %s" % status)'''
-        '''exit()'''
-
-    def on_bathroom_change(self):
-        """used to report the state of the led.
-
-        This is attached to the on change event.  And will speak the
-        status of the led.
-        """
-        status = GPIO.get("GPIO6")
-        '''self.speak("Bathroom is %s" % status)'''
-        '''exit()'''
-
-    def on_kitchen_change(self):
-        """used to report the state of the led.
-
-        This is attached to the on change event.  And will speak the
-        status of the led.
-        """
-        status = GPIO.get("GPIO7")
-        '''self.speak("Kitchen is %s" % status)'''
-        '''exit()'''
-
-    def on_lamp_change(self):
-        """used to report the state of the led.
-
-        This is attached to the on change event.  And will speak the
-        status of the led.
-        """
-        status = GPIO.get("GPIO8")
-        '''self.speak("Lamp is %s" % status)'''
-        '''exit()'''
+        key = self.getSwitchKey(self.switches, gpio)
+        status = GPIO.get(gpio)
+        name = self.switches[key]['name']
+        self.speak("%s is %s" % (name, status))
 
     def __init__(self):
         """This is used to initize the GPIO kill
@@ -141,128 +86,20 @@ class GPIO_ControlSkill(MycroftSkill):
         for listening to the io change.
         """
         self.blink_active = False
-        GPIO.on("GPIO1",self.on_led_change)
-        GPIO.on("GPIO2",self.on_switch_change)
-        GPIO.on("GPIO3",self.on_fan_change)
-        GPIO.on("GPIO4",self.on_bedroom_change)
-        GPIO.on("GPIO5",self.on_livingroom_change)
-        GPIO.on("GPIO6",self.on_bathroom_change)
-        GPIO.on("GPIO7",self.on_kitchen_change)
-        GPIO.on("GPIO8",self.on_lamp_change)
+        for key in self.switches:
+            GPIO.on(self.switches[key]['gpio'], self.on_change)
         super(GPIO_ControlSkill, self).__init__(name="GPIO_ControlSkill")
 
-    def blink_led(self):
+    def blink(self):
         """This Will Start the Led blink process
 
         This function will start the led blink process and continue
         until blink_active is false.
         """
         if self.blink_active:
-            threading.Timer(10, self.blink_led).start()
-        if self.blink_active:
-            if GPIO.get("GPIO1")!="On":
-                GPIO.set("GPIO1","On")
-            else:
-                GPIO.set("GPIO1","Off")
-
-    def blink_switch(self):
-        """This Will Start the Switch blink process
-
-        This function will start the switch blink process and continue
-        until blink_active is false.
-        """
-        if self.blink_active:
-            threading.Timer(10, self.blink_switch).start()
-        if self.blink_active:
-            if GPIO.get("GPIO2")!="On":
-                GPIO.set("GPIO2","On")
-            else:
-                GPIO.set("GPIO2","Off")
-
-    def blink_fan(self):
-        """This Will Start the Switch blink process
-
-        This function will start the switch blink process and continue
-        until blink_active is false.
-        """
-        if self.blink_active:
-            threading.Timer(10, self.blink_fan).start()
-        if self.blink_active:
-            if GPIO.get("GPIO3")!="On":
-                GPIO.set("GPIO3","On")
-            else:
-                GPIO.set("GPIO3","Off")
-
-    def blink_bedroom(self):
-        """This Will Start the Switch blink process
-
-        This function will start the switch blink process and continue
-        until blink_active is false.
-        """
-        if self.blink_active:
-            threading.Timer(10, self.blink_bedroom).start()
-        if self.blink_active:
-            if GPIO.get("GPIO4")!="On":
-                GPIO.set("GPIO4","On")
-            else:
-                GPIO.set("GPIO4","Off")
-
-    def blink_livingroom(self):
-        """This Will Start the Switch blink process
-
-        This function will start the switch blink process and continue
-        until blink_active is false.
-        """
-        if self.blink_active:
-            threading.Timer(10, self.blink_livingroom).start()
-        if self.blink_active:
-            if GPIO.get("GPIO5")!="On":
-                GPIO.set("GPIO5","On")
-            else:
-                GPIO.set("GPIO5","Off")
-
-    def blink_bathroom(self):
-        """This Will Start the Switch blink process
-
-        This function will start the switch blink process and continue
-        until blink_active is false.
-        """
-        if self.blink_active:
-            threading.Timer(10, self.blink_bathroom).start()
-        if self.blink_active:
-            if GPIO.get("GPIO6")!="On":
-                GPIO.set("GPIO6","On")
-            else:
-                GPIO.set("GPIO6","Off")
-
-    def blink_kitchen(self):
-        """This Will Start the Switch blink process
-
-        This function will start the switch blink process and continue
-        until blink_active is false.
-        """
-        if self.blink_active:
-            threading.Timer(10, self.blink_kitchen).start()
-        if self.blink_active:
-            if GPIO.get("GPIO7")!="On":
-                GPIO.set("GPIO7","On")
-            else:
-                GPIO.set("GPIO7","Off")
-
-    def blink_lamp(self):
-        """This Will Start the Switch blink process
-
-        This function will start the switch blink process and continue
-        until blink_active is false.
-        """
-        if self.blink_active:
-            threading.Timer(10, self.blink_lamp).start()
-        if self.blink_active:
-            if GPIO.get("GPIO8")!="On":
-                GPIO.set("GPIO8","On")
-            else:
-                GPIO.set("GPIO8","Off")
-
+            gpio = self.switches['LIGHT']["gpio"]
+            GPIO.set(gpio, "Off" if GPIO.get(gpio)!="Off" else "On")
+            threading.Timer(10, self.blink).start()
 
     def initialize(self):
         """This function will initialize the Skill for Blinking an LED
@@ -325,138 +162,23 @@ class GPIO_ControlSkill(MycroftSkill):
                 intent.
         """
         if message.data["command"].upper() == "BLINK":
-            self.speak_dialog("ledblink")
-            if self.blink_active:
-                self.blink_active = False
-            else:
-                self.blink_active = True
-                self.blink_led()
+            key = message.data["ioobject"].upper()
+            if key == 'LIGHT':
+                self.speak_dialog(self.switches[key]['dialog'])
+                self.blink_active = not self.blink_active
+                if self.blink_active:
+                    self.blink()
         elif message.data["command"].upper() == "STATUS":
-            if message.data["ioobject"].upper() == "LIGHT":
-                self.on_led_change()
+            if message.data["ioobject"].upper() in self.switches:
+                switch = self.switches[message.data["ioobject"].upper()]
+                self.on_change(switch['gpio'])
         elif message.data["command"].upper() == "TURN":
-            if message.data["ioobject"].upper() == "LIGHT":
-                if "ioparam" in message.data:
-                    if message.data["ioparam"].upper() == "OFF":
-                        self.blink_active = False
-                        GPIO.set("GPIO1","Off")
-                    elif message.data["ioparam"].upper() == "ON":
-                        self.blink_active = False
-                        GPIO.set("GPIO1","On")
-        if message.data["command"].upper() == "BLINK":
-            self.speak_dialog("switchblink")
-            if self.blink_active:
+            if "ioparam" in message.data:
+                switch = self.switches[message.data["ioobject"].upper()]
                 self.blink_active = False
+                GPIO.set(switch['gpio'], "Off" if message.data["ioparam"].upper() == "OFF" else "ON")
             else:
-                self.blink_active = True
-                self.blink_switch()
-        elif message.data["command"].upper() == "TURN":
-            if message.data["ioobject"].upper() == "SWITCH":
-                if "ioparam" in message.data:
-                    if message.data["ioparam"].upper() == "OFF":
-                        self.blink_active = False
-                        GPIO.set("GPIO2","Off")
-                    elif message.data["ioparam"].upper() == "ON":
-                        self.blink_active = False
-                        GPIO.set("GPIO2","On")
-        if message.data["command"].upper() == "BLINK":
-            self.speak_dialog("fanblink")
-            if self.blink_active:
-                self.blink_active = False
-            else:
-                self.blink_active = True
-                self.blink_fan()
-        elif message.data["command"].upper() == "TURN":
-            if message.data["ioobject"].upper() == "FAN":
-                if "ioparam" in message.data:
-                    if message.data["ioparam"].upper() == "OFF":
-                        self.blink_active = False
-                        GPIO.set("GPIO3","Off")
-                    elif message.data["ioparam"].upper() == "ON":
-                        self.blink_active = False
-                        GPIO.set("GPIO3","On")
-        if message.data["command"].upper() == "BLINK":
-            self.speak_dialog("bedroomblink")
-            if self.blink_active:
-                self.blink_active = False
-            else:
-                self.blink_active = True
-                self.blink_bedroom()
-        elif message.data["command"].upper() == "TURN":
-            if message.data["ioobject"].upper() == "BEDROOM":
-                if "ioparam" in message.data:
-                    if message.data["ioparam"].upper() == "OFF":
-                        self.blink_active = False
-                        GPIO.set("GPIO4","Off")
-                    elif message.data["ioparam"].upper() == "ON":
-                        self.blink_active = False
-                        GPIO.set("GPIO4","On")
-        if message.data["command"].upper() == "BLINK":
-            self.speak_dialog("livingroomblink")
-            if self.blink_active:
-                self.blink_active = False
-            else:
-                self.blink_active = True
-                self.blink_livingroom()
-        elif message.data["command"].upper() == "TURN":
-            if message.data["ioobject"].upper() == "LIVING":
-                if "ioparam" in message.data:
-                    if message.data["ioparam"].upper() == "OFF":
-                        self.blink_active = False
-                        GPIO.set("GPIO5","Off")
-                    elif message.data["ioparam"].upper() == "ON":
-                        self.blink_active = False
-                        GPIO.set("GPIO5","On")
-        if message.data["command"].upper() == "BLINK":
-            self.speak_dialog("bathroomblink")
-            if self.blink_active:
-                self.blink_active = False
-            else:
-                self.blink_active = True
-                self.blink_bathroom()
-        elif message.data["command"].upper() == "TURN":
-            if message.data["ioobject"].upper() == "BATHROOM":
-                if "ioparam" in message.data:
-                    if message.data["ioparam"].upper() == "OFF":
-                        self.blink_active = False
-                        GPIO.set("GPIO6","Off")
-                    elif message.data["ioparam"].upper() == "ON":
-                        self.blink_active = False
-                        GPIO.set("GPIO6","On")
-        if message.data["command"].upper() == "BLINK":
-            self.speak_dialog("kitchenblink")
-            if self.blink_active:
-                self.blink_active = False
-            else:
-                self.blink_active = True
-                self.blink_kitchen()
-        elif message.data["command"].upper() == "TURN":
-            if message.data["ioobject"].upper() == "KITCHEN":
-                if "ioparam" in message.data:
-                    if message.data["ioparam"].upper() == "OFF":
-                        self.blink_active = False
-                        GPIO.set("GPIO7","Off")
-                    elif message.data["ioparam"].upper() == "ON":
-                        self.blink_active = False
-                        GPIO.set("GPIO7","On")
-        if message.data["command"].upper() == "BLINK":
-            self.speak_dialog("lampblink")
-            if self.blink_active:
-                self.blink_active = False
-            else:
-                self.blink_active = True
-                self.blink_lamp()
-        elif message.data["command"].upper() == "TURN":
-            if message.data["ioobject"].upper() == "LAMP":
-                if "ioparam" in message.data:
-                    if message.data["ioparam"].upper() == "OFF":
-                        self.blink_active = False
-                        GPIO.set("GPIO8","Off")
-                    elif message.data["ioparam"].upper() == "ON":
-                        self.blink_active = False
-                        GPIO.set("GPIO8","On")
-                else:
-                    self.speak_dialog("ipparamrequired")
+                self.speak_dialog("ipparamrequired")
 
     def stop(self):
         """This function will clean up the Skill"""

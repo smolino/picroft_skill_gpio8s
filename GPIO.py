@@ -26,8 +26,23 @@ blink_active = False
 This will not start the blinking it will only be important once blinking
 has started.  This is currently only used in testing.
 """
+GPIOS = { "GPIO1":27,
+          "GPIO2":17,
+          "GPIO3":22,
+          "GPIO4":05,
+          "GPIO5":06,
+          "GPIO6":13,
+          "GPIO7":19,
+          "GPIO8":26 }
 
-GPIO_STATE = {}
+GPIO_STATE = { "GPIO1":"Off",
+               "GPIO2":"Off",
+               "GPIO3":"Off",
+               "GPIO4":"Off",
+               "GPIO5":"Off",
+               "GPIO6":"Off",
+               "GPIO7":"Off",
+               "GPIO8":"Off" }
 """ This is an object of tracking GPIO"""
 
 GPIO_ON = {}
@@ -54,14 +69,8 @@ def ButtonHandeler(channel):
 """This is the setup for the RPi GPIO"""
 if pi_interface:
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(27,GPIO.OUT)
-    GPIO.setup(17,GPIO.OUT)
-    GPIO.setup(22,GPIO.OUT)
-    GPIO.setup(05,GPIO.OUT)
-    GPIO.setup(06,GPIO.OUT)
-    GPIO.setup(13,GPIO.OUT)
-    GPIO.setup(19,GPIO.OUT)
-    GPIO.setup(26,GPIO.OUT)
+    for gpio in GPIOS:
+        GPIO.setup(GPIOS[gpio],GPIO.OUT)
 """ GPIO.add_event_detect(17,GPIO.BOTH,ButtonHandeler)"""
 
 def set(key,value):
@@ -75,76 +84,15 @@ def set(key,value):
         value(int or str): The value to set the gpio to.
     """
     GPIO_STATE[key] = value
-    if (key=="GPIO1") and pi_interface:
-        if value.upper()=="ON":
-            GPIO.output(27,GPIO.LOW)
-        else:
-            GPIO.output(27,GPIO.HIGH)
+    if pi_interface:
+        for gpio in GPIOS:
+            if (key == gpio):
+                if value.upper() == "ON":
+                    GPIO.output(GPIOS[gpio], GPIO.LOW)
+                else:
+                    GPIO.output(GPIOS[gpio],GPIO.HIGH)
     if key in GPIO_ON:
-       GPIO_ON[key]()
-
-    GPIO_STATE[key]= value
-    if (key=="GPIO2") and pi_interface:
-        if value.upper()=="ON":
-            GPIO.output(17,GPIO.LOW)
-        else:
-            GPIO.output(17,GPIO.HIGH)
-    if key in GPIO_ON:
-        GPIO_ON[key]()
-
-    GPIO_STATE[key]= value
-    if (key=="GPIO3") and pi_interface:
-        if value.upper()=="ON":
-            GPIO.output(22,GPIO.LOW)
-        else:
-            GPIO.output(22,GPIO.HIGH)
-    if key in GPIO_ON:
-        GPIO_ON[key]()
-
-    GPIO_STATE[key] = value
-    if (key=="GPIO4") and pi_interface:
-        if value.upper()=="ON":
-            GPIO.output(05,GPIO.LOW)
-        else:
-            GPIO.output(05,GPIO.HIGH)
-    if key in GPIO_ON:
-       GPIO_ON[key]()
-
-    GPIO_STATE[key]= value
-    if (key=="GPIO5") and pi_interface:
-        if value.upper()=="ON":
-            GPIO.output(06,GPIO.LOW)
-        else:
-            GPIO.output(06,GPIO.HIGH)
-    if key in GPIO_ON:
-        GPIO_ON[key]()
-
-    GPIO_STATE[key]= value
-    if (key=="GPIO6") and pi_interface:
-        if value.upper()=="ON":
-            GPIO.output(13,GPIO.LOW)
-        else:
-            GPIO.output(13,GPIO.HIGH)
-    if key in GPIO_ON:
-        GPIO_ON[key]()
-
-    GPIO_STATE[key]= value
-    if (key=="GPIO7") and pi_interface:
-        if value.upper()=="ON":
-            GPIO.output(19,GPIO.LOW)
-        else:
-            GPIO.output(19,GPIO.HIGH)
-    if key in GPIO_ON:
-        GPIO_ON[key]()
-
-    GPIO_STATE[key]= value
-    if (key=="GPIO8") and pi_interface:
-        if value.upper()=="ON":
-            GPIO.output(26,GPIO.LOW)
-        else:
-            GPIO.output(26,GPIO.HIGH)
-    if key in GPIO_ON:
-        GPIO_ON[key]()
+        GPIO_ON[key](key)
 
 
 def get(key):
@@ -175,7 +123,7 @@ if __name__=="__main__":
     This should show that everything is working to the developer and allow
     for changes going forward
     """
-    def printgpio():
+    def printgpio(key):
         print(GPIO_STATE)
 
     def blink_led():
@@ -214,7 +162,7 @@ if __name__=="__main__":
     if pi_interface:
         print("GPIO is valid")
 
-    
+
     def blink_fan():
         if blink_active:
             threading.Timer(0.5, blink_fan).start()
@@ -322,4 +270,3 @@ if __name__=="__main__":
     blink_active = False
     if pi_interface:
         print("GPIO is valid")
-
