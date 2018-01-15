@@ -72,8 +72,26 @@ Turn Bedroom On
 Turn Bedroom Off
 ```
 
-And Picroft do not respond
+And Picroft respond
 
+```
+Switch is On
+Switch is Off
+Light is on
+Light is Off
+Fan is On
+Fan is Off
+Living is On
+Living is Off
+Bathroom is On
+Bathroom is Off
+Kitchen is On
+Kitchen is Off
+Lamp is On
+Lamp is Off
+Bedroom is On
+Bedroom is Off
+```
 
 Remember to add mycroft user to gpio group:
 
